@@ -1,21 +1,21 @@
-import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType";
+import { ARTISTFAIL, ARTISTLOADING, ARTISTSUCCESS } from "./actionType";
   
   const initStore = {
     loading: false,
     error: false,
-    songs:[] ,
+      artists:[] ,
   };
   
-  export const SongReducer = (store = initStore, { type, payload }) => {
+  export const ArtistReducer = (store = initStore, { type, payload }) => {
     switch (type) {
-      case SONGLOADING :
+      case ARTISTLOADING :
         return {
           ...store,
           loading: true,
           error: false,
         };
   
-      case SONGSUCCESS :
+      case ARTISTSUCCESS :
         return {
           ...store,
           loading: false,
@@ -23,7 +23,7 @@ import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType";
           songs: payload,
         };
   
-      case SONGFAIL : 
+      case ARTISTFAIL : 
         return {
           ...store,
           error: true,
@@ -40,4 +40,4 @@ import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType";
   };
   
 
-  export default SongReducer;
+  export default ArtistReducer;

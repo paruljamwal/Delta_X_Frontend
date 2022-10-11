@@ -41,6 +41,8 @@ const Register = () => {
     navigate("/login")
   }
 
+  // console.log(registerData);
+
   return (
     <Container style={{width:"50%"}} >
     <Form>
