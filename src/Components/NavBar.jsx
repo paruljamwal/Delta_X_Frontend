@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
-// import { BsSearch} from 'react-icons/bs';
+import { BiLogInCircle} from 'react-icons/bi';
 import {GiLoveSong} from 'react-icons/gi';
 import {GoHome} from 'react-icons/go';
 import {BsFillPersonFill} from 'react-icons/bs';
@@ -26,7 +26,7 @@ const NavBar = () => {
         <Link to="/" > <Nav>Home <GoHome/></Nav></Link>   
         <Link to="/songs" > <Nav>Songs<GiLoveSong/> </Nav></Link>   
         <Link to="/artist" > <Nav>Artists<BsFillPersonFill/></Nav></Link>   
-        <Link to="/login" > <Nav>Login</Nav></Link>    
+        <Link to="/login" > <Nav>Login <BiLogInCircle/> </Nav></Link>    
              <Link to="/register" > <Nav>Register</Nav></Link>    
           </Nav>
           <Form className="d-flex">

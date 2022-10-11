@@ -8,6 +8,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import DatePicker from "../Components/DatePicker";
 import { AiOutlinePlus} from 'react-icons/ai';
+import { GiCancel } from 'react-icons/gi';
+import {FiSave} from 'react-icons/fi';
 
 const AddSong = () => {
   const [show, setShow] = useState(false);
@@ -67,11 +69,14 @@ const AddSong = () => {
   }
   
   const handelChange=(e)=>{
-    console.log(e.target.value,"e")
     const {name,value}=e.target;
     setArtistdata({...artistData,[name]:value});
   }
   
+  const handelSongs=(e)=>{
+    const {name,value}=e.target;
+    setAddSong({...addSong,[name]:value})
+  }
 
   const handleClose = () => {
     // validations()
@@ -87,19 +92,19 @@ const AddSong = () => {
         label="Email address"
         className="mb-3"
       >
-        <Form.Control type="text" placeholder="Song Name" />
+        <Form.Control name="name" onChange={handelSongs} type="text" placeholder="Song Name" />
       </FloatingLabel>
       <FloatingLabel controlId="floatingPassword" label="Date Released">
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control  name="date" onChange={handelSongs} type="date" />
       </FloatingLabel>
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>ArtWork</Form.Label>
-        <Form.Control type="file" />
+        <Form.Control  name="cover" onChange={handelSongs} type="file" />
       </Form.Group>
       <Row className="g-2">
       <Col md>
       <FloatingLabel height={"30px"} controlId="floatingSelect" label="Select Artist">
-        <Form.Select  aria-label="Floating label select example">
+        <Form.Select  name="artist" onChange={handelSongs}  aria-label="Floating label select example">
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -165,13 +170,13 @@ const AddSong = () => {
         </Modal.Footer>
       </Modal>
 
-      <Row style={{margin:"30px 10px 0px 70%"}}>
+      <Row style={{margin:"30px 10px 0px 60%"}}>
        <Col>
       <Button variant="outline-success" style={{margin:"10px"}}  type="cancle">
-        Cancle
+       <GiCancel/> Cancle
       </Button>
       <Button variant="success" type="submit">
-        Save
+      <FiSave/>  Save
       </Button>
        
        </Col>

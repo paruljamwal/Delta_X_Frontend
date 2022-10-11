@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { Button,  Container} from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import {BsMusicNoteBeamed} from 'react-icons/bs';
-import Rating from '../Components/Rating'
+import StarRating  from '../Components/Rating'
 
 
 const Songs = () => {
+  const [rating,setRating]=useState(0);
   const navigate=useNavigate();
   const AddSong=()=>{
      navigate("/addsong")
   }
+
+
+  const handleChange = (value) => {
+    setRating(value);
+  }
+
+
   return (
     <Container>
   
@@ -35,22 +43,13 @@ const Songs = () => {
         <td>Mark</td>
         <td>Otto</td>
         <td>@mdo</td>
-        <td> <Rating/>  </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td><Rating/></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Larry the Bird</td>
-        <td>@twitter</td>
-        <td>Thornton</td>
-        <td><Rating/></td>
-        
+        <td>      <StarRating style={ {cursor:"pointer"}}
+       count={5}
+       size={40}
+       value={rating}
+       activeColor ={'yellow'}
+       inactiveColor={'#7e7e7e'}
+       onChange={handleChange}  />  </td>
       </tr>
     </tbody>
   </Table>
