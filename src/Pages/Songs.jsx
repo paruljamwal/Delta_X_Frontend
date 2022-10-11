@@ -1,10 +1,24 @@
-import React from 'react'
-import { Container } from 'react-bootstrap';
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
+import { Button,  Container} from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
+import {BsMusicNoteBeamed} from 'react-icons/bs';
+import Rating from '../Components/Rating'
+
 
 const Songs = () => {
+  const navigate=useNavigate();
+  const AddSong=()=>{
+     navigate("/addsong")
+  }
   return (
     <Container>
+  
+   <Container style={{width:"20%", margin:"4% 0% 0% 90%"}} >
+  <Button onClick={AddSong} variant={'success'} > <BsMusicNoteBeamed/> Add Song</Button>
+   </Container>
+   
+
     <Table striped >
     <thead>
       <tr>
@@ -21,21 +35,21 @@ const Songs = () => {
         <td>Mark</td>
         <td>Otto</td>
         <td>@mdo</td>
-        <td>2</td>
+        <td> <Rating/>  </td>
       </tr>
       <tr>
         <td>2</td>
         <td>Jacob</td>
         <td>Thornton</td>
         <td>@fat</td>
-        <td>2</td>
+        <td><Rating/></td>
       </tr>
       <tr>
         <td>3</td>
         <td>Larry the Bird</td>
         <td>@twitter</td>
         <td>Thornton</td>
-        <td>2</td>
+        <td><Rating/></td>
         
       </tr>
     </tbody>

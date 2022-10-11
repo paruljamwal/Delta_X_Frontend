@@ -7,14 +7,78 @@ import { Container } from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import DatePicker from "../Components/DatePicker";
-
+import { AiOutlinePlus} from 'react-icons/ai';
 
 const AddSong = () => {
   const [show, setShow] = useState(false);
+  const [artistData,setArtistdata]=useState({
+    name:"",
+    DOB:"",
+    Bio:""
 
-  const handleClose = () => setShow(false);
+  });
+
+  // add song...
+  const [addSong,setAddSong]=useState({
+    name:"",
+    cover:"",
+    userId:"",
+    artistId:""
+  });
+
+
   const handleShow = () => setShow(true);
+  
+  const artistValidations=(val)=>{
+   
+    const err={};
+    if(!val.name){
+      err.name="name is required";
+    }
+    if(!val.DOB){
+      err.DOB="DOB is required";
+    }
+    if(!val.Bio){
+      err.Bio="Bio is required";
+    }
+    return err;
+  };
 
+
+
+
+  // songValidations...
+
+  const songValidations=(val)=>{
+    const err={};
+    if(!val.name){
+      err.name="name is required";
+    }
+    if(!val.cover){
+      err.cover="cover image is required"
+    }
+
+    if(!val.userId){
+      err.userId="userId is requuired";
+    }
+    if(!val.artistId){
+      err.artistId="artistId is required";
+    }
+  }
+  
+  const handelChange=(e)=>{
+    console.log(e.target.value,"e")
+    const {name,value}=e.target;
+    setArtistdata({...artistData,[name]:value});
+  }
+  
+
+  const handleClose = () => {
+    // validations()
+    setShow(false)
+  };
+  
+  
   return (
     <Container style={{width:"50%"}} >
     <Form>
@@ -46,13 +110,16 @@ const AddSong = () => {
       <Col md>
 
       <Button variant="outline-success" onClick={handleShow}>
-      Add Artist
+      <AiOutlinePlus/> Add Artist
       </Button>
       </Col>
 
 
       </Row>
 
+
+
+     {/* Add artist */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title> Add Artist</Modal.Title>
@@ -61,24 +128,27 @@ const AddSong = () => {
           <Form>
             <FloatingLabel
               controlId="floatingInput"
-              label="Email address"
+              label="name"
               className="mb-3"
+              
             >
-              <Form.Control type="text" placeholder="name@example.com" />
+              <Form.Control name="name" onChange={handelChange} type="text" placeholder="name" />
             </FloatingLabel>
 
             {/* DatePicker */}
-             <DatePicker/> 
+             <DatePicker  handelChange={handelChange}  /> 
 
 
 
             <FloatingLabel
               controlId="floatingTextarea2"
               label="Add Bio here..."
-            >
+              
+              >
               <Form.Control
                 as="textarea"
-                
+                name="Bio"
+                onChange={handelChange} 
                 placeholder="Enter Bio here"
                 style={{ height: "100px" , marginTop:"20px" }}
               />
@@ -89,7 +159,7 @@ const AddSong = () => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleClose}>
+          <Button variant="success"  onClick={handleClose}>
             Done
           </Button>
         </Modal.Footer>
