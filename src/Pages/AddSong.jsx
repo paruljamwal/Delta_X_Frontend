@@ -3,6 +3,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Modal from "react-bootstrap/Modal";
+import { Container } from "react-bootstrap";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import DatePicker from "../Components/DatePicker";
+
+
 const AddSong = () => {
   const [show, setShow] = useState(false);
 
@@ -10,6 +16,7 @@ const AddSong = () => {
   const handleShow = () => setShow(true);
 
   return (
+    <Container style={{width:"50%"}} >
     <Form>
       <FloatingLabel
         controlId="floatingInput"
@@ -25,21 +32,30 @@ const AddSong = () => {
         <Form.Label>ArtWork</Form.Label>
         <Form.Control type="file" />
       </Form.Group>
-      <FloatingLabel controlId="floatingSelect" label="Works with selects">
-        <Form.Select aria-label="Floating label select example">
-          <option>Select Artists</option>
+      <Row className="g-2">
+      <Col md>
+      <FloatingLabel height={"30px"} controlId="floatingSelect" label="Select Artist">
+        <Form.Select  aria-label="Floating label select example">
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </Form.Select>
       </FloatingLabel>
+
+      </Col>
+      <Col md>
+
       <Button variant="outline-success" onClick={handleShow}>
-        Add Artist
+      Add Artist
       </Button>
+      </Col>
+
+
+      </Row>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Artist</Modal.Title>
+          <Modal.Title> Add Artist</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -51,19 +67,10 @@ const AddSong = () => {
               <Form.Control type="text" placeholder="name@example.com" />
             </FloatingLabel>
 
-            <div
-              id="date-picker-example"
-              className="md-form md-outline input-with-post-icon datepicker"
-              inline="true"
-            >
-              <input
-                placeholder="Select date"
-                type="text"
-                id="example"
-                className="form-control"
-              />
-              <i class="fas fa-calendar input-prefix"></i>
-            </div>
+            {/* DatePicker */}
+             <DatePicker/> 
+
+
 
             <FloatingLabel
               controlId="floatingTextarea2"
@@ -71,8 +78,9 @@ const AddSong = () => {
             >
               <Form.Control
                 as="textarea"
+                
                 placeholder="Enter Bio here"
-                style={{ height: "100px" }}
+                style={{ height: "100px" , marginTop:"20px" }}
               />
             </FloatingLabel>
           </Form>
@@ -81,19 +89,26 @@ const AddSong = () => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="success" onClick={handleClose}>
             Done
           </Button>
         </Modal.Footer>
       </Modal>
 
-      <Button variant="outline-success" type="cancle">
+      <Row style={{margin:"30px 10px 0px 70%"}}>
+       <Col>
+      <Button variant="outline-success" style={{margin:"10px"}}  type="cancle">
         Cancle
       </Button>
-      <Button variant="primary" type="submit">
+      <Button variant="success" type="submit">
         Save
       </Button>
+       
+       </Col>
+
+      </Row>
     </Form>
+    </Container>
   );
 };
 

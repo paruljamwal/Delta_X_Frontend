@@ -1,9 +1,10 @@
 import React from 'react'
+import Songs from './Songs'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div> <Songs/> </div>
   )
 }
 
-export default Home
+export default Home;
