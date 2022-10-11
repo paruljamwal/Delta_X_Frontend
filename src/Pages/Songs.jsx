@@ -1,9 +1,11 @@
 import React from 'react'
+import { Container } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 
 const Songs = () => {
   return (
-    <Table striped>
+    <Container>
+    <Table striped >
     <thead>
       <tr>
         <th>ArtWork</th>
@@ -19,20 +21,26 @@ const Songs = () => {
         <td>Mark</td>
         <td>Otto</td>
         <td>@mdo</td>
+        <td>2</td>
       </tr>
       <tr>
         <td>2</td>
         <td>Jacob</td>
         <td>Thornton</td>
         <td>@fat</td>
+        <td>2</td>
       </tr>
       <tr>
         <td>3</td>
-        <td colSpan={2}>Larry the Bird</td>
+        <td>Larry the Bird</td>
         <td>@twitter</td>
+        <td>Thornton</td>
+        <td>2</td>
+        
       </tr>
     </tbody>
   </Table>
+  </Container>
   )
 }
 
