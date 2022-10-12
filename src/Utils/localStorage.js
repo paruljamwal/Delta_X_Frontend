@@ -2,15 +2,16 @@
 
 const getLocalData=(key)=>{
     if(key){
-        const data=localStorage.getItem(key);
+        const data=JSON.parse(localStorage.getItem(key));
         return key;
     }
 };
 
 
-const saveLocalData=(key,value)=>{
+const saveLocalData=(key,value=false)=>{
+
     if(key && value){
-        localStorage.setItem(key,value);
+         localStorage.setItem(key,JSON.stringify(value));
     }
 }
 

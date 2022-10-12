@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
+import { useDispatch, useSelector } from 'react-redux';
+import { getArtist } from '../Redux/artist/artistAction';
 
 const Artists = () => {
+  const dispatch = useDispatch();
+  const artists = useSelector(store => store.Artist.artists);
+
+  useEffect(() => {
+     dispatch(getArtist());
+
+  }, []);
+
+  // console.log(artists,"art");
+
   return (
     <Container>
     <Table striped>
@@ -14,21 +26,19 @@ const Artists = () => {
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
+      {
+
+       artists && artists?.artists?.map((e)=>(
+      <tr key={e._id}>
+        <td>{e.name}</td>
+        <td>{e.DOB}</td>
+        <td>{e.BIO}</td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
+
+        ))
+
+      }
+     
     </tbody>
   </Table>
   </Container>

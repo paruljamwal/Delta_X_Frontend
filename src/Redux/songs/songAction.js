@@ -1,7 +1,8 @@
+import axios from "axios"
 import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType"
 
 
-const songLoading=()=>{
+export const songLoading=()=>{
     return{
         type: SONGLOADING ,    
     }
@@ -26,8 +27,8 @@ const songFail=(payload)=>{
 
 export const GetSong=(payload)=>(dispatch)=>{
     dispatch(songLoading());
-    axios("")
-    .then((res)=>dispatch(songSucces(payload)))
+    axios("https://deltaxmusic-api.herokuapp.com/song")
+    .then((res)=>dispatch(songSucces(res.data)))
     .then((err)=>dispatch(songFail(err)))
 }
 
@@ -36,7 +37,7 @@ export const GetSong=(payload)=>(dispatch)=>{
 
 export const AddSong=(payload)=>(dispatch)=>{
     dispatch(songLoading());
-    axios.post("",payload)
+    axios.post("https://deltaxmusic-api.herokuapp.com/song",payload)
     .then((res)=>dispatch(songSucces(payload)))
     .then((err)=>dispatch(songFail(err)))
 }

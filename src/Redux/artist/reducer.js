@@ -7,6 +7,7 @@ import { ARTISTFAIL, ARTISTLOADING, ARTISTSUCCESS } from "./actionType";
   };
   
   export const ArtistReducer = (store = initStore, { type, payload }) => {
+ 
     switch (type) {
       case ARTISTLOADING :
         return {
@@ -20,7 +21,7 @@ import { ARTISTFAIL, ARTISTLOADING, ARTISTSUCCESS } from "./actionType";
           ...store,
           loading: false,
           error: false,
-          songs: payload,
+          artists: payload,
         };
   
       case ARTISTFAIL : 

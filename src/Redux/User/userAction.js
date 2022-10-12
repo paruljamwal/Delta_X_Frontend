@@ -1,8 +1,8 @@
 import axios from "axios";
 import {
-  REGISTERUSERFAIL,
-  REGISTERUSERLOADING,
-  REGISTERUSERSUCCESS,
+  REGISTERFAIL,
+  REGISTERLOADING,
+  REGISTERSUCCESS,
   USERFAIL,
   USERLOADING,
   USERSUCCESS,
@@ -31,7 +31,7 @@ const userFail = (payload) => {
 export const LoginUser = (payload) => (dispatch) => {
   dispatch(userLoading());
   axios
-    .post("", payload)
+    .post("https://deltaxmusic-api.herokuapp.com/login", payload)
     .then((res) => dispatch(userSucces(payload)))
     .then((err) => dispatch(userFail(err)));
 };
@@ -44,12 +44,12 @@ const registerLoading = () => {
   };
 };
 
-const registerSucces = (payload) => {
-  return {
-    type: REGISTERSUCCESS,
-    payload,
-  };
-};
+// const registerSucces = (payload) => {
+//   return {
+//     type: REGISTERSUCCESS,
+//     payload,
+//   };
+// };
 
 const registerFail = (payload) => {
   return {
@@ -59,9 +59,9 @@ const registerFail = (payload) => {
 };
 
 export const RegisterUser = (payload) => (dispatch) => {
+ 
   dispatch(registerLoading());
   axios
-    .post("", payload)
-    .then((res) => dispatch(registerSucces(payload)))
+    .post("https://deltaxmusic-api.herokuapp.com/register", payload)
     .then((err) => dispatch(registerFail(err)));
 };

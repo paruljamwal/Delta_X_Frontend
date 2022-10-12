@@ -4,11 +4,15 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { RegisterUser } from "../Redux/User/userAction";
 
 
 const Register = () => {
 
-  const navigate=useNavigate();
+  const [err,setError]=useState({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [registerData,setRegisterdata]=useState({
     name:"",
@@ -22,10 +26,13 @@ const Register = () => {
     const err={};
 
     if(!val.email){
-      err.DOB="email is required";
+      err.email="email is required";
+    }
+    if(!val.name){
+      err.name="name is required";
     }
     if(!val.password){
-      err.Bio="password is required";
+      err.password="password is required";
     }
     return err;
   };
@@ -34,15 +41,20 @@ const Register = () => {
   const handelRegister=(e)=>{
     const {name,value}=e.target;
     setRegisterdata({...registerData,[name]:value});
+    setError(registerValidations(registerData));
   }
   
 
   const registerValidData=()=>{
-    navigate("/login")
+    setError(registerValidations(registerData));
+      if(registerData.name && registerData.password && registerData.email ){
+        dispatch(RegisterUser(registerData));
+        navigate("/login");
+      }  
   }
 
   // console.log(registerData);
-
+console.log(err,"ere")
   return (
     <Container style={{width:"50%"}} >
     <Form>
@@ -53,7 +65,10 @@ const Register = () => {
         className="mb-3"
       >
         <Form.Control name="name" onChange={handelRegister} type="name" placeholder="Enter your name" />
+     
       </FloatingLabel>
+      <p>{registerData.name ? "" : err?.name }</p>
+
 
     
 
@@ -64,6 +79,7 @@ const Register = () => {
       >
         <Form.Control name="email" onChange={handelRegister} type="email" placeholder="Enter Email Address" />
       </FloatingLabel>
+      <p>{registerData.email ? "" : err?.email }</p>
 
       <FloatingLabel
         controlId="floatingInput"
@@ -72,9 +88,11 @@ const Register = () => {
       >
         <Form.Control name="password" onChange={handelRegister} type="password" placeholder="Enter Password" />
       </FloatingLabel>
+      <p style={{color:"red", fontSize:"smaller", maginTop:"-10px"}} >{registerData.password ? "" : err?.password }</p>
+
       
   
-      <Button variant="success" type="submit" onClick={registerValidData} >
+      <Button variant="success" onClick={registerValidData} >
         Register
       </Button>
 

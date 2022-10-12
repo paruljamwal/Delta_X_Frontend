@@ -16,6 +16,7 @@ const initStore = {
 };
 
 export const UserReducer = (store = initStore, { type, payload }) => {
+
   switch (type) {
 
     case REGISTERLOADING:
@@ -25,13 +26,7 @@ export const UserReducer = (store = initStore, { type, payload }) => {
         error: false,
       };
 
-    case REGISTERSUCCESS:
-      return {
-        ...store,
-        loading: false,
-        error: false,
-        isAuth: payload,
-      };
+  
 
     case REGISTERFAIL:
       return {
@@ -48,15 +43,16 @@ export const UserReducer = (store = initStore, { type, payload }) => {
       };
 
     case USERSUCCESS:
-      saveLocalData("isAuth",payload)
+      saveLocalData("isAuth",true)
       return {
         ...store,
         loading: false,
         error: false,
-        isAuth: payload,
+        isAuth: true ,
       };
 
     case USERFAIL:
+      saveLocalData("isAuth",false)
       return {
         ...store,
         error: true,
