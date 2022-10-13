@@ -1,5 +1,5 @@
 import axios from "axios"
-import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType"
+import { FILTERSONGS, SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType"
 
 
 export const songLoading=()=>{
@@ -9,7 +9,7 @@ export const songLoading=()=>{
 }
 
 
-const songSucces=(payload)=>{
+ export const songSucces=(payload)=>{
     return {
         type:SONGSUCCESS ,
         payload
@@ -25,7 +25,26 @@ const songFail=(payload)=>{
 }
 
 
-export const GetSong=(payload)=>(dispatch)=>{
+export const filterSongs=(text)=>{
+    console.log(text,"t")
+    return{
+        type:FILTERSONGS,
+        payload:text
+    }
+}
+
+export const GetSingleSong=()=>(dispatch)=>{
+    // console.log(payload,"p")
+    dispatch(songLoading());
+    axios(`https://deltaxmusic-api.herokuapp.com/song/6344549600cfa5189a59a9c4`)
+    .then((res)=>dispatch(songSucces(res.data)))
+    .then((err)=>dispatch(songFail(err)))
+}
+
+
+
+
+export const GetSong=()=>(dispatch)=>{
     dispatch(songLoading());
     axios("https://deltaxmusic-api.herokuapp.com/song")
     .then((res)=>dispatch(songSucces(res.data)))
@@ -35,9 +54,9 @@ export const GetSong=(payload)=>(dispatch)=>{
 
 
 
-export const AddSong=(payload)=>(dispatch)=>{
+export const AddSongs=(payload)=>(dispatch)=>{
     dispatch(songLoading());
     axios.post("https://deltaxmusic-api.herokuapp.com/song",payload)
-    .then((res)=>dispatch(songSucces(payload)))
+    .then((res)=>dispatch(songSucces(res.data)))
     .then((err)=>dispatch(songFail(err)))
 }

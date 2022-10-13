@@ -8,7 +8,7 @@ const getLocalData=(key)=>{
 };
 
 
-const saveLocalData=(key,value=false)=>{
+const saveLocalData=(key,value)=>{
 
     if(key && value){
          localStorage.setItem(key,JSON.stringify(value));

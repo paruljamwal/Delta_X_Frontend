@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { RegisterUser } from "../Redux/User/userAction";
 
@@ -54,7 +54,7 @@ const Register = () => {
   }
 
   // console.log(registerData);
-console.log(err,"ere")
+// console.log(err,"ere")
   return (
     <Container style={{width:"50%"}} >
     <Form>
@@ -95,6 +95,8 @@ console.log(err,"ere")
       <Button variant="success" onClick={registerValidData} >
         Register
       </Button>
+
+      <p>If you already have an account <Link to="/login" >Login</Link> </p>
 
     </Form>
     </Container>

@@ -1,35 +1,80 @@
-import React, { useState } from 'react'; 
+import { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 
-function StarRating({count, value, 
-    inactiveColor='#ddd',
-    size=24,
-    activeColor='yellow', onChange}) {
+const colors = {
+    orange: "#FFBA5A",
+    grey: "#a9a9a9"
+    
+};
 
-  // short trick 
-  const stars = Array.from({length: count}, () => '🟊')
 
-  // Internal handle change function
-  const handleChange = (value) => {
-    onChange(value + 1);
+
+function StarRating() {
+  const dispatch = useDispatch();
+  const [currentValue, setCurrentValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
+  const stars = Array(5).fill(0)
+
+  const handleClick = value => {
+    setCurrentValue(value)
   }
 
+  const handleMouseOver = newHoverValue => {
+    setHoverValue(newHoverValue)
+  };
+
+  const handleMouseLeave = () => {
+    setHoverValue(undefined)
+  }
+
+  
+  useEffect(() => {
+    
+    console.log(currentValue,"c")
+  
+
+  }, [currentValue]);
+  
   return (
-    <div>
-      {stars.map((s, index) => {
-        let style = inactiveColor;
-        if (index < value) {
-          style=activeColor;
-        }
-        return (
-          <span className={"star"}  
-            key={index}
-            style={{color: style, width:size, height:size, fontSize: size}}
-            onClick={()=>handleChange(index)}>{s}</span>
-        )
-      })}
-      {value}
+    <div style={styles.container}>
+      <div style={styles.stars}>
+        {stars.map((_, index) => {
+          return (
+            <FaStar
+              key={index}
+              size={24}
+              onClick={() => handleClick(index + 1)}
+              onMouseOver={() => handleMouseOver(index + 1)}
+              onMouseLeave={handleMouseLeave}
+              color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+              style={{
+                marginRight: 10,
+                cursor: "pointer"
+              }}
+            />
+          )
+        })}
+      </div>  
     </div>
-  )
-}
+  );
+};
+
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  stars: {
+    display: "flex",
+    flexDirection: "row",
+  }
+
+};
+
+
+
 
 export default StarRating;

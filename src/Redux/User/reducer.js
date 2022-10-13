@@ -12,7 +12,7 @@ import { getLocalData, saveLocalData  } from "../../Utils/localStorage";
 const initStore = {
   loading: false,
   error: false,
-  isAuth: getLocalData("isAuth") ? true :  false ,
+  isAuth:  false ,
 };
 
 export const UserReducer = (store = initStore, { type, payload }) => {
@@ -36,6 +36,7 @@ export const UserReducer = (store = initStore, { type, payload }) => {
       };
 
     case USERLOADING:
+
       return {
         ...store,
         loading: true,
@@ -48,11 +49,11 @@ export const UserReducer = (store = initStore, { type, payload }) => {
         ...store,
         loading: false,
         error: false,
-        isAuth: true ,
+        isAuth: payload ,
       };
 
     case USERFAIL:
-      saveLocalData("isAuth",false)
+    
       return {
         ...store,
         error: true,

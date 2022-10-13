@@ -1,4 +1,4 @@
-import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType";
+import { FILTERSONGS, SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType";
   
   const initStore = {
     loading: false,
@@ -7,6 +7,7 @@ import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType";
   };
   
   export const SongReducer = (store = initStore, { type, payload }) => {
+    console.log(payload,"p")
     switch (type) {
       case SONGLOADING :
         return {
@@ -30,6 +31,11 @@ import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType";
           loading: false,
         };
   
+        case FILTERSONGS:
+          return{
+            ...store,
+            songs: store.songs.filter((e)=> e.name.includes(payload))
+          }
   
       default:
         return{

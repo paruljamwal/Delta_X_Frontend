@@ -1,15 +1,43 @@
-import React from 'react';
-import { Image } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BiLogInCircle} from 'react-icons/bi';
 import {GiLoveSong} from 'react-icons/gi';
 import {GoHome} from 'react-icons/go';
 import {BsFillPersonFill} from 'react-icons/bs';
+import {BiLogOutCircle} from 'react-icons/bi';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { filterSongs, GetSingleSong, GetSong, songSucces } from '../Redux/songs/songAction';
 const NavBar = () => {
+  const [search,setSearch] = useState("");
+  const [sData,setSData] = useState();
+  
+  const SongsDetails= useSelector(store => store.Song.songs);
+
+
+  // const isAuth = useSelector(store=> store.User.isAuth);
+  const isAuth= localStorage.getItem("isAuth");
+  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  
+  const handelLogout=()=>{
+    localStorage.clear();
+    navigate("/login")
+  }
+
+ const [query,setQuery] = useState("");
+
+ const handelSearch = (e)=>{
+  setQuery(e.target.value);
+  
+ }
+
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -26,19 +54,9 @@ const NavBar = () => {
         <Link to="/" > <Nav>Home <GoHome/></Nav></Link>   
         <Link to="/songs" > <Nav>Songs<GiLoveSong/> </Nav></Link>   
         <Link to="/artist" > <Nav>Artists<BsFillPersonFill/></Nav></Link>   
-        <Link to="/login" > <Nav>Login <BiLogInCircle/> </Nav></Link>    
-             <Link to="/register" > <Nav>Register</Nav></Link>    
-          </Nav>
-          <Form className="d-flex">
-            {/* <BsSearch style={{position:"absolute"}} /> */}
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
+        <Link to="/login" > {isAuth ?  <Nav onClick={handelLogout} variant="transparent" >Logout<BiLogOutCircle/></Nav> : <Nav>Login<BiLogInCircle/></Nav> } </Link>    
              
-            />
-          </Form>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

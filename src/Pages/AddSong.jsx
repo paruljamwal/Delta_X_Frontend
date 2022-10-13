@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -10,9 +10,21 @@ import DatePicker from "../Components/DatePicker";
 import { AiOutlinePlus} from 'react-icons/ai';
 import { GiCancel } from 'react-icons/gi';
 import {FiSave} from 'react-icons/fi';
-
+import { useDispatch, useSelector } from "react-redux";
+import { AddArtist, getArtist } from "../Redux/artist/artistAction";
+import {AddSongs} from '../Redux/songs/songAction';
+import { userSucces } from "../Redux/User/userAction";
 const AddSong = () => {
   const [show, setShow] = useState(false);
+  const [artistsId,setArtistId] = useState();
+  const [useId,setUserId] = useState();
+  
+  const dispatch = useDispatch();
+  const artists = useSelector(store => store.Artist.artists);
+  const songs = useSelector(store=>store.Song.songs);
+  const user = useSelector(store=>store.User.isAuth);
+
+
   const [artistData,setArtistdata]=useState({
     name:"",
     DOB:"",
@@ -28,6 +40,8 @@ const AddSong = () => {
     artistId:""
   });
 
+  // artists.filter((e)=>(e.name==))
+ 
 
   const handleShow = () => setShow(true);
   
@@ -74,22 +88,38 @@ const AddSong = () => {
   }
   
   const handelSongs=(e)=>{
-    const {name,value}=e.target;
+    let {name,value}=e.target;
     setAddSong({...addSong,[name]:value})
   }
 
   const handleClose = () => {
     // validations()
+   dispatch(AddArtist(artistData));
     setShow(false)
   };
+
+  const handelSong=()=>{
+    // dispatch(AddSongs(addSong))
+    console.log(addSong,"artist");
+    // console.log(artistsId,"ai")
+
+    
+  }
+
+
   
-  
+  useEffect(()=>{
+    dispatch(getArtist());
+    dispatch(userSucces() )
+  },[]);
+
+
   return (
     <Container style={{width:"50%"}} >
     <Form>
       <FloatingLabel
         controlId="floatingInput"
-        label="Email address"
+        label="Song name"
         className="mb-3"
       >
         <Form.Control name="name" onChange={handelSongs} type="text" placeholder="Song Name" />
@@ -99,15 +129,23 @@ const AddSong = () => {
       </FloatingLabel>
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>ArtWork</Form.Label>
-        <Form.Control  name="cover" onChange={handelSongs} type="file" />
+        <Form.Control  name="cover" onChange={handelSongs} type="text" />
       </Form.Group>
       <Row className="g-2">
       <Col md>
       <FloatingLabel height={"30px"} controlId="floatingSelect" label="Select Artist">
         <Form.Select  name="artist" onChange={handelSongs}  aria-label="Floating label select example">
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          { 
+           artists && artists?.artists?.map((e)=>(
+             
+             <option key={e._id} value={e.name}>{e.name}</option>
+             
+          
+            
+      
+              ))
+      
+            }
         </Form.Select>
       </FloatingLabel>
 
@@ -137,7 +175,7 @@ const AddSong = () => {
               className="mb-3"
               
             >
-              <Form.Control name="name" onChange={handelChange} type="text" placeholder="name" />
+              <Form.Control name="name" onChange={handelChange} type="text" placeholder="Artist name" />
             </FloatingLabel>
 
             {/* DatePicker */}
@@ -170,12 +208,12 @@ const AddSong = () => {
         </Modal.Footer>
       </Modal>
 
-      <Row style={{margin:"30px 10px 0px 60%"}}>
+      <Row style={{margin:"30px 10px 0px 40%"}}>
        <Col>
       <Button variant="outline-success" style={{margin:"10px"}}  type="cancle">
        <GiCancel/> Cancle
       </Button>
-      <Button variant="success" type="submit">
+      <Button variant="success" onClick={handelSong} >
       <FiSave/>  Save
       </Button>
        

@@ -14,7 +14,7 @@ const userLoading = () => {
   };
 };
 
-const userSucces = (payload) => {
+export const userSucces = (payload) => {
   return {
     type: USERSUCCESS,
     payload,

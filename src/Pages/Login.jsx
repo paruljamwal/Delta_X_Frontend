@@ -7,7 +7,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../Redux/User/userAction";
-
+import { Link } from "react-router-dom";
 
 const Login = () => {
 
@@ -47,10 +47,7 @@ const Login = () => {
     setError(LoginValidations(loginData));
     if(loginData.email && loginData.password ){
       dispatch(LoginUser(loginData))
-    }
-    if(isAuth){
       navigate("/");
-      
     }
   }
 
@@ -81,6 +78,8 @@ const Login = () => {
       <Button variant="success"  onClick={loginValidData} >
         Login
       </Button>
+
+      <p>If you don't have any account <Link to="/register" >Register</Link> </p>
 
     </Form>
     </Container>
