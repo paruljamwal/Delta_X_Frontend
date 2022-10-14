@@ -14,10 +14,12 @@ function StarRating() {
   const dispatch = useDispatch();
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+  const [count,setCount] = useState(0);
   const stars = Array(5).fill(0)
 
   const handleClick = value => {
     setCurrentValue(value)
+    setCount(value);
   }
 
   const handleMouseOver = newHoverValue => {
@@ -31,7 +33,7 @@ function StarRating() {
   
   useEffect(() => {
     
-    console.log(currentValue,"c")
+   console.log(count,"rating")
   
 
   }, [currentValue]);

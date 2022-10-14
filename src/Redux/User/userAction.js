@@ -9,17 +9,18 @@ import {
 } from "./actionType";
 
 const userLoading = () => {
+  console.log("call")
   return {
     type: USERLOADING,
   };
 };
 
-export const userSucces = (payload) => {
-  return {
+export const userSucces = (payload) => ({
+
     type: USERSUCCESS,
     payload,
-  };
-};
+  
+});
 
 const userFail = (payload) => {
   return {
@@ -29,10 +30,11 @@ const userFail = (payload) => {
 };
 
 export const LoginUser = (payload) => (dispatch) => {
+  console.log(payload,"pay")
   dispatch(userLoading());
   axios
     .post("https://deltaxmusic-api.herokuapp.com/login", payload)
-    .then((res) => dispatch(userSucces(payload)))
+    .then((res) => dispatch(userSucces(res?.data)))
     .then((err) => dispatch(userFail(err)));
 };
 
@@ -44,12 +46,12 @@ const registerLoading = () => {
   };
 };
 
-// const registerSucces = (payload) => {
-//   return {
-//     type: REGISTERSUCCESS,
-//     payload,
-//   };
-// };
+export const registerSucces = (payload) => {
+  return {
+    type: REGISTERSUCCESS,
+    payload,
+  };
+};
 
 const registerFail = (payload) => {
   return {

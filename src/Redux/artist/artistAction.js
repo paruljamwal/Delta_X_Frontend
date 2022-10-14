@@ -26,7 +26,6 @@ const artistFail=(payload)=>{
 
 
 export const getArtist=(payload)=>(dispatch)=>{
-
     dispatch(artistLoading());
     axios("https://deltaxmusic-api.herokuapp.com/artist")
     .then((res)=>dispatch(artistSucces(res.data)))

@@ -13,18 +13,16 @@ import {FiSave} from 'react-icons/fi';
 import { useDispatch, useSelector } from "react-redux";
 import { AddArtist, getArtist } from "../Redux/artist/artistAction";
 import {AddSongs} from '../Redux/songs/songAction';
-import { userSucces } from "../Redux/User/userAction";
+
+
 const AddSong = () => {
   const [show, setShow] = useState(false);
-  const [artistsId,setArtistId] = useState();
-  const [useId,setUserId] = useState();
-  
+
   const dispatch = useDispatch();
   const artists = useSelector(store => store.Artist.artists);
-  const songs = useSelector(store=>store.Song.songs);
-  const user = useSelector(store=>store.User.isAuth);
+  const user = useSelector((store)=>store.User.isAuth);
 
-
+  console.log(user,"Uas]]ser")
   const [artistData,setArtistdata]=useState({
     name:"",
     DOB:"",
@@ -36,7 +34,7 @@ const AddSong = () => {
   const [addSong,setAddSong]=useState({
     name:"",
     cover:"",
-    userId:"",
+    userId:user?._id,
     artistId:""
   });
 
@@ -89,8 +87,9 @@ const AddSong = () => {
   
   const handelSongs=(e)=>{
     let {name,value}=e.target;
-    setAddSong({...addSong,[name]:value})
+    setAddSong({...addSong,[name]:value});
   }
+  console.log(addSong)
 
   const handleClose = () => {
     // validations()
@@ -99,7 +98,7 @@ const AddSong = () => {
   };
 
   const handelSong=()=>{
-    // dispatch(AddSongs(addSong))
+    dispatch(AddSongs(addSong))
     console.log(addSong,"artist");
     // console.log(artistsId,"ai")
 
@@ -110,7 +109,7 @@ const AddSong = () => {
   
   useEffect(()=>{
     dispatch(getArtist());
-    dispatch(userSucces() )
+    // dispatch(userSucces())
   },[]);
 
 
@@ -134,11 +133,11 @@ const AddSong = () => {
       <Row className="g-2">
       <Col md>
       <FloatingLabel height={"30px"} controlId="floatingSelect" label="Select Artist">
-        <Form.Select  name="artist" onChange={handelSongs}  aria-label="Floating label select example">
+        <Form.Select  name="artistId" onChange={handelSongs}  aria-label="Floating label select example">
           { 
            artists && artists?.artists?.map((e)=>(
              
-             <option key={e._id} value={e.name}>{e.name}</option>
+             <option   key={e._id} value={e._id}>{e.name}</option>
              
           
             

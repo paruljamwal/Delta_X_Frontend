@@ -46,6 +46,7 @@ const Register = () => {
   
 
   const registerValidData=()=>{
+    localStorage.setItem("User",registerData?.name);
     setError(registerValidations(registerData));
       if(registerData.name && registerData.password && registerData.email ){
         dispatch(RegisterUser(registerData));

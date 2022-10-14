@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FILTERSONGS, SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType"
+import { SONGFAIL, SONGLOADING, SONGSUCCESS } from "./actionType"
 
 
 export const songLoading=()=>{
@@ -25,13 +25,6 @@ const songFail=(payload)=>{
 }
 
 
-export const filterSongs=(text)=>{
-    console.log(text,"t")
-    return{
-        type:FILTERSONGS,
-        payload:text
-    }
-}
 
 export const GetSingleSong=()=>(dispatch)=>{
     // console.log(payload,"p")

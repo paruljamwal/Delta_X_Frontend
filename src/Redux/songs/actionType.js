@@ -4,4 +4,3 @@ export const SONGSUCCESS="SONGSUCCESS";
 export const SONGFAIL="SONGFAIL";
 
 
-export const FILTERSONGS = "FILTERSONGS";
