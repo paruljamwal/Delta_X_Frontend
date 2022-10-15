@@ -3,7 +3,7 @@
  <img src=""/>
 
 
-# Getting Started with Create React App
+
 
 <h1>Requirements:</h1>
   
