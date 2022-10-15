@@ -22,7 +22,7 @@ const AddSong = () => {
   const artists = useSelector(store => store.Artist.artists);
   const user = useSelector((store)=>store.User.isAuth);
 
-  console.log(user,"Uas]]ser")
+
   const [artistData,setArtistdata]=useState({
     name:"",
     DOB:"",
@@ -89,7 +89,7 @@ const AddSong = () => {
     let {name,value}=e.target;
     setAddSong({...addSong,[name]:value});
   }
-  console.log(addSong)
+  // console.log(addSong)
 
   const handleClose = () => {
     // validations()
@@ -99,17 +99,13 @@ const AddSong = () => {
 
   const handelSong=()=>{
     dispatch(AddSongs(addSong))
-    console.log(addSong,"artist");
-    // console.log(artistsId,"ai")
-
-    
+    // console.log(addSong,"artist");
   }
 
 
   
   useEffect(()=>{
     dispatch(getArtist());
-    // dispatch(userSucces())
   },[]);
 
 
@@ -138,10 +134,6 @@ const AddSong = () => {
            artists && artists?.artists?.map((e)=>(
              
              <option   key={e._id} value={e._id}>{e.name}</option>
-             
-          
-            
-      
               ))
       
             }
@@ -214,10 +206,8 @@ const AddSong = () => {
       </Button>
       <Button variant="success" onClick={handelSong} >
       <FiSave/>  Save
-      </Button>
-       
+      </Button>   
        </Col>
-
       </Row>
     </Form>
     </Container>

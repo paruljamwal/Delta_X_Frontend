@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -15,8 +15,10 @@ const Login = () => {
   const navigate=useNavigate();
 
   const isAuth = useSelector(store =>store.User.isAuth);
+  const user = useSelector((store)=>store.User.isAuth);
 
-  const [err, setError]=useState();
+  const [err, setError]=useState({});
+  const [isSubmit,setIsSubmit] = useState(false);
   const [loginData,setLogindata]=useState({
     email:"",
     password:""
@@ -26,12 +28,20 @@ const Login = () => {
   const LoginValidations=(val)=>{
    
     const err={};
+    var regexEmail = /\S+@\S+\.\S+/;
+    var regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
     if(!val.email){
       err.email="email is required";
+    }else if(!regexEmail.test(val.email)){
+      err.email="Please enter valid email address!"
     }
     if(!val.password){
       err.password="password is required";
+    }else if(val.password.length < 6){
+      err.password= "password should have atleast 6 characters!";    
+    }else if(!regexPassword.test(val.password)){
+      err.password= "password should have strings,numbers,symblys!";    
     }
     return err;
   };
@@ -40,18 +50,24 @@ const Login = () => {
   const handelLogin=(e)=>{
     const {name,value}=e.target;
     setLogindata({...loginData,[name]:value});
+   
   }
   
 
   const loginValidData=()=>{
     setError(LoginValidations(loginData));
-    if(loginData.email && loginData.password ){
-      dispatch(LoginUser(loginData))
-      navigate("/");
-    }
+    setIsSubmit(true);
+   
   }
 
- 
+ useEffect(()=>{
+  if(Object.keys(err).length === 0 && isSubmit && user.createdAt){
+    dispatch(LoginUser(loginData));
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
+  }
+ },[err]);
 
   return (
     <Container style={{width:"50%"}} >
@@ -63,7 +79,7 @@ const Login = () => {
       >
         <Form.Control name="email" onChange={handelLogin} type="email" placeholder="Enter Email Address" />
       </FloatingLabel>
-      <p>{loginData.email ? "" : err?.email }</p>
+      <p>{err?.email}</p>
 
       <FloatingLabel
         controlId="floatingInput"
@@ -72,14 +88,15 @@ const Login = () => {
       >
         <Form.Control name="password" onChange={handelLogin} type="password" placeholder="Enter Password" />
       </FloatingLabel>
-      <p>{loginData.password ? "" : err?.password }</p>
+      <p>{err?.password}</p>
       
   
       <Button variant="success"  onClick={loginValidData} >
         Login
       </Button>
-
-      <p>If you don't have any account <Link to="/register" >Register</Link> </p>
+      {(Object.keys(err).length === 0 && isSubmit && user.createdAt)?<div>Login Successfully</div>:""}
+     
+      <h5>If you don't have any account <Link to="/register" >Register</Link> </h5>
 
     </Form>
     </Container>
