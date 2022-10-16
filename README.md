@@ -42,7 +42,7 @@
    Runs the app in the development mode.  <br>
    Open http://localhost:3000 to view it in your browser.  <br>
 
- <h1> Demo </h1> 🔗  :    <br>
+ <h1> Demo </h1> 🔗  : https://coruscating-moxie-0fbda7.netlify.app    <br>
  
  <h1> FEATURES </h1>   <br>
    1. Search songs by name <br>
