@@ -1,6 +1,6 @@
 # Delta_X Assignment
 
- <img style={{width:"100%}} src="https://i.pinimg.com/originals/88/4a/40/884a408310b28171aa1018f77dee2602.gif"/>
+ <img style={width:"100%} src="https://i.pinimg.com/originals/88/4a/40/884a408310b28171aa1018f77dee2602.gif"/>
 
   
   # Register page
