@@ -73,11 +73,13 @@ const Songs = () => {
         <tbody>
           {songs?.songs
             .filter((e) => e.name.toLowerCase().includes(query.toLowerCase()))
+            .sort((a,b)=>a.rating-b.rating)
+            .slice(0,10)
             .map((e) => (
               <tr key={e._id}>
                 <td>
                   {" "}
-                  <Image src={e.cover} alt={e._name} />{" "}
+                  <Image style={{width:"100px"}} src={e.cover} alt={e._name} />{" "}
                 </td>
                 <td>{e.name}</td>
                 <td>{moment(e.createdAt).format("Do MMMM YYYY")}</td>
@@ -87,7 +89,7 @@ const Songs = () => {
                   ))}
                 </td>
                 <td>
-                  <StarRating style={{ cursor: "pointer" }} />
+                  <StarRating id={e._id}  style={{ cursor: "pointer" }} />
                 </td>
               </tr>
             ))}

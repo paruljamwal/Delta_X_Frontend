@@ -27,7 +27,7 @@ const artistFail=(payload)=>{
 
 export const getArtist=(payload)=>(dispatch)=>{
     dispatch(artistLoading());
-    axios("https://deltaxmusic-api.herokuapp.com/artist")
+  return  axios("https://deltaxmusic-api.herokuapp.com/artist")
     .then((res)=>dispatch(artistSucces(res.data)))
     .then((err)=>dispatch(artistFail(err)))
 }
@@ -35,7 +35,7 @@ export const getArtist=(payload)=>(dispatch)=>{
 
 export const AddArtist=(payload)=>(dispatch)=>{
     dispatch(artistLoading());
-    axios.post("https://deltaxmusic-api.herokuapp.com/artist",payload)
+  return  axios.post("https://deltaxmusic-api.herokuapp.com/artist",payload)
     .then((res)=>dispatch(artistSucces(payload)))
     .then((err)=>dispatch(artistFail(err)))
 }

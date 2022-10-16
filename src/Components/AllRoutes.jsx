@@ -5,6 +5,8 @@ import Artists from '../Pages/Artists'
 import Login from '../Pages/Login'
 import Register from '../Pages/Register';
 import Songs from '../Pages/Songs'
+import Error from './Error'
+import PrivateRoute from './privateRoute'
 
 const AllRoutes = () => {
   return (
@@ -13,8 +15,9 @@ const AllRoutes = () => {
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
       <Route path="/songs" element={<AddSong/>} />
-      <Route path='/artist' element={<Artists/>} />
+      <Route path='/artist' element={<PrivateRoute><Artists/></PrivateRoute>} />
       <Route path='/addsong' element={<AddSong/>} />
+      <Route path="*" element={<Error/>}  />
     </Routes>
   )
 }

@@ -3,13 +3,16 @@ import { Container } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArtist } from '../Redux/artist/artistAction';
+import { GetSong } from '../Redux/songs/songAction';
 
 const Artists = () => {
   const dispatch = useDispatch();
-  const artists = useSelector(store => store.Artist.artists);
+  const songs = useSelector((store) => store.Song.songs);
 
   useEffect(() => {
-     dispatch(getArtist());
+
+     dispatch(GetSong());
+
 
   }, []);
 
@@ -28,11 +31,11 @@ const Artists = () => {
     <tbody>
       {
 
-       artists && artists?.artists?.map((e)=>(
+      songs?.songs.sort((a,b)=>a.rating-b.rating).slice(0,10).map((e)=>(
       <tr key={e._id}>
+        <td>{e?.artistId.map((e)=>e.name)}</td>
+        <td>{e?.artistId.map((e)=>e.DOB)}</td>
         <td>{e.name}</td>
-        <td>{e.DOB}</td>
-        <td>{e.BIO}</td>
       </tr>
 
         ))

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { GetSong, Rating } from "../Redux/songs/songAction";
 
 const colors = {
     orange: "#FFBA5A",
@@ -10,7 +11,8 @@ const colors = {
 
 
 
-function StarRating() {
+function StarRating({id}) {
+
   const dispatch = useDispatch();
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
@@ -20,6 +22,11 @@ function StarRating() {
   const handleClick = value => {
     setCurrentValue(value)
     setCount(value);
+    const payload={
+      rating:Number (value) 
+    }
+
+    dispatch(Rating(id,payload)).then((e)=>dispatch(GetSong()))
   }
 
   const handleMouseOver = newHoverValue => {
@@ -32,11 +39,8 @@ function StarRating() {
 
   
   useEffect(() => {
-    
-   console.log(count,"rating")
-  
-
-  }, [currentValue]);
+   
+  }, [currentValue,count]);
   
   return (
     <div style={styles.container}>

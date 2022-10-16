@@ -12,7 +12,7 @@ import { GiCancel } from 'react-icons/gi';
 import {FiSave} from 'react-icons/fi';
 import { useDispatch, useSelector } from "react-redux";
 import { AddArtist, getArtist } from "../Redux/artist/artistAction";
-import {AddSongs} from '../Redux/songs/songAction';
+import {AddSongs, GetSong, songSucces} from '../Redux/songs/songAction';
 
 
 const AddSong = () => {
@@ -105,19 +105,19 @@ const AddSong = () => {
 
   const handleClose = () => {
     // validations()
-   dispatch(AddArtist(artistData));
+   dispatch(AddArtist(artistData)).then((e)=>dispatch(getArtist()));
     setShow(false)
   };
 
   const handelSong=()=>{
-    dispatch(AddSongs(addSong))
+    dispatch(AddSongs(addSong)).then((e)=>dispatch(getArtist()))
     // console.log(addSong,"artist");
   }
 
 
   
   useEffect(()=>{
-    dispatch(getArtist());
+    dispatch(getArtist())
   },[dispatch,artistData,addSong]);
 
 
