@@ -5,9 +5,17 @@
   
   # Register page
   <img src="https://user-images.githubusercontent.com/96183163/196058494-0876128c-5e17-4965-86c7-57b056790427.png" />
-  #Landing page
-
-
+  #Login page
+  <img src="https://user-images.githubusercontent.com/96183163/196058607-164fcc38-4e94-4266-8ec3-bf3fc62a069f.png" />
+    #Home page
+  <img src="https://user-images.githubusercontent.com/96183163/196058663-f88b9c0d-dd4a-4311-b279-2f66932d6249.png" />
+    #Add song
+  <img src="https://user-images.githubusercontent.com/96183163/196058682-26f68b7d-e382-4178-9746-62756d817444.png" />
+    #Add artist
+  <img src="https://user-images.githubusercontent.com/96183163/196058694-752a4edc-ab94-4820-b9a9-cdc30038ddd7.png" />
+    #Artist page
+  <img src="https://user-images.githubusercontent.com/96183163/196058725-ea3c4d0f-e152-4697-a3b3-9950a2543dbc.png" />
+  
 <h1>Requirements:</h1>
   
    1.  Node.js (version-16.17.0) <br>
