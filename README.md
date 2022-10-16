@@ -2,7 +2,10 @@
 
  <img src=""/>
 
-
+  
+  # Register page
+  <img src="https://user-images.githubusercontent.com/96183163/196058494-0876128c-5e17-4965-86c7-57b056790427.png" />
+  #Landing page
 
 
 <h1>Requirements:</h1>
