@@ -14,9 +14,8 @@ const AllRoutes = () => {
       <Route exact path="/" element={<Songs/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
-      <Route path="/songs" element={<AddSong/>} />
+      <Route path="/addsong" element={<PrivateRoute><AddSong/></PrivateRoute>} />
       <Route path='/artist' element={<PrivateRoute><Artists/></PrivateRoute>} />
-      <Route path='/addsong' element={<AddSong/>} />
       <Route path="*" element={<Error/>}  />
     </Routes>
   )
