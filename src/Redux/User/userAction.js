@@ -30,9 +30,8 @@ const userFail = (payload) => {
 };
 
 export const LoginUser = (payload) => (dispatch) => {
-  console.log(payload,"pay")
   dispatch(userLoading());
-  axios
+ return axios
     .post("https://deltaxmusic-api.herokuapp.com/login", payload)
     .then((res) => dispatch(userSucces(res?.data)))
     .then((err) => dispatch(userFail(err)));
@@ -63,7 +62,7 @@ const registerFail = (payload) => {
 export const RegisterUser = (payload) => (dispatch) => {
  
   dispatch(registerLoading());
-  axios
+return  axios
     .post("https://deltaxmusic-api.herokuapp.com/register", payload)
     .then((err) => dispatch(registerFail(err)));
 };

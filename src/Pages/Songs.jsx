@@ -77,7 +77,7 @@ const Songs = () => {
               <tr key={e._id}>
                 <td>
                   {" "}
-                  <Image src={e.cover} />{" "}
+                  <Image src={e.cover} alt={e._name} />{" "}
                 </td>
                 <td>{e.name}</td>
                 <td>{moment(e.createdAt).format("Do MMMM YYYY")}</td>

@@ -57,16 +57,20 @@ const Login = () => {
   const loginValidData=()=>{
     setError(LoginValidations(loginData));
     setIsSubmit(true);
-   
+    
   }
-
- useEffect(()=>{
-  if(Object.keys(err).length === 0 && isSubmit && user.createdAt){
-    dispatch(LoginUser(loginData));
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
-  }
+  
+  useEffect(()=>{
+    if(Object.keys(err).length === 0 && isSubmit  ){
+      dispatch(LoginUser(loginData)).then((r)=>{
+        if(r.payload.type=="USERSUCCESS"){
+          navigate("/",{replace:true});
+        }
+        else{
+          navigate("/login");
+        }
+      })
+    }
  },[err]);
 
   return (
@@ -94,7 +98,7 @@ const Login = () => {
       <Button variant="success"  onClick={loginValidData} >
         Login
       </Button>
-      {(Object.keys(err).length === 0 && isSubmit && user.createdAt)?<div>Login Successfully</div>:""}
+      {(Object.keys(err).length === 0 && isSubmit && user.createdAt)?<span>Login Successfully</span>:""}
      
       <h5>If you don't have any account <Link to="/register" >Register</Link> </h5>
 

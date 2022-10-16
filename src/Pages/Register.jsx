@@ -110,7 +110,7 @@ const Register = () => {
       >
         <Form.Control name="password" onChange={handelRegister} type="password" placeholder="Enter Password" />
       </FloatingLabel>
-      <p style={{color:"red", fontSize:"smaller", maginTop:"-10px"}} >{ err?.password }</p>
+      <p  >{ err?.password }</p>
 
       
   
@@ -118,9 +118,9 @@ const Register = () => {
         Register
       </Button>
 
-      {(Object.keys(err).length === 0 && isSubmit) ? "Register SuccessFull ": ""}
+      {(Object.keys(err).length === 0 && isSubmit) ? <span> Register SuccessFull</span>: ""}
 
-      <p>If you already have an account <Link to="/login" >Login</Link> </p>
+      <h5>If you already have an account <Link to="/login" >Login</Link> </h5>
 
     </Form>
     </Container>

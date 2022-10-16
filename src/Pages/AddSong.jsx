@@ -17,10 +17,13 @@ import {AddSongs} from '../Redux/songs/songAction';
 
 const AddSong = () => {
   const [show, setShow] = useState(false);
-
+  const [err,setError] = useState({});
+  
   const dispatch = useDispatch();
   const artists = useSelector(store => store.Artist.artists);
   const user = useSelector((store)=>store.User.isAuth);
+  
+  const [userId] = useState(user?._id);
 
 
   const [artistData,setArtistdata]=useState({
@@ -34,7 +37,7 @@ const AddSong = () => {
   const [addSong,setAddSong]=useState({
     name:"",
     cover:"",
-    userId:user?._id,
+    userId:userId,
     artistId:""
   });
 
@@ -47,13 +50,17 @@ const AddSong = () => {
    
     const err={};
     if(!val.name){
-      err.name="name is required";
+      err.name="artist name is required";
+    }else if(val.name.length < 3){
+      err.name = "name should have atleast 3 characters!";    
     }
     if(!val.DOB){
       err.DOB="DOB is required";
     }
     if(!val.Bio){
       err.Bio="Bio is required";
+    }else if(val.Bio.length < 3){
+      err.password= "Bio should have atleast 3 characters!";    
     }
     return err;
   };
@@ -66,7 +73,9 @@ const AddSong = () => {
   const songValidations=(val)=>{
     const err={};
     if(!val.name){
-      err.name="name is required";
+      err.name="song name is required";
+    }else if(val.name.length < 3){
+      err.name = "song name should have atleast 3 characters!";    
     }
     if(!val.cover){
       err.cover="cover image is required"
@@ -75,6 +84,7 @@ const AddSong = () => {
     if(!val.userId){
       err.userId="userId is requuired";
     }
+
     if(!val.artistId){
       err.artistId="artistId is required";
     }
@@ -83,11 +93,13 @@ const AddSong = () => {
   const handelChange=(e)=>{
     const {name,value}=e.target;
     setArtistdata({...artistData,[name]:value});
+    setError(artistValidations(artistData));
   }
   
   const handelSongs=(e)=>{
     let {name,value}=e.target;
     setAddSong({...addSong,[name]:value});
+        setError(songValidations(addSong));
   }
   // console.log(addSong)
 
@@ -106,7 +118,7 @@ const AddSong = () => {
   
   useEffect(()=>{
     dispatch(getArtist());
-  },[]);
+  },[dispatch,artistData,addSong]);
 
 
   return (
@@ -119,13 +131,16 @@ const AddSong = () => {
       >
         <Form.Control name="name" onChange={handelSongs} type="text" placeholder="Song Name" />
       </FloatingLabel>
+      <p>{ err?.name }</p>
       <FloatingLabel controlId="floatingPassword" label="Date Released">
         <Form.Control  name="date" onChange={handelSongs} type="date" />
       </FloatingLabel>
+      <p>{ err?.date}</p>
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>ArtWork</Form.Label>
         <Form.Control  name="cover" onChange={handelSongs} type="text" />
       </Form.Group>
+      <p>{ err?.cover}</p>
       <Row className="g-2">
       <Col md>
       <FloatingLabel height={"30px"} controlId="floatingSelect" label="Select Artist">

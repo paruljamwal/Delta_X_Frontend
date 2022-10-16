@@ -30,4 +30,12 @@ a :hover{
 
 Image{
   width:30px;
+  height: 50px;
+}
+p{
+  color: crimson ;
+}
+
+span{
+  color: green;
 }
