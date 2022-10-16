@@ -33,7 +33,8 @@
    
    <h1>How to Run </h1> 
    
-   <h2> Clone this repository: </h2> 🔗 https://github.com/paruljamwal/Delta_X_Frontend.git   <br>
+   <h2> Clone this repository for frontend part : </h2> 🔗 https://github.com/paruljamwal/Delta_X_Frontend.git   <br>
+   <h2> clone this repository for backend part : >/h2> 🔗https://github.com/paruljamwal/Delta-X-backend.git  <br>
     step1. open cmdpromt or gitbash  <br>
     step2. clone the repo..  <br>
     step3. npm i  <br>
